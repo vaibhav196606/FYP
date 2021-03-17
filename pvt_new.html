@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/93fd6bbb87.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
+    <title>Plant Design and Safety</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center heading">PRESSURE VESSEL THICKNESS <i class="fas fa-industry"></i></div>
+        <div class="container main">
+            <div class="row justify-content-center">
+                <div class="col-8 btn btn-lg m-2 sel">
+                    <form id="designNew">
+                        <h3>Shape of Vessel :</h3>
+                        <div class="form-row">
+                            <div class="col-6 form-group">
+                                <label for="cylinder">Cylinder</label>
+                                <input type="radio" class="form-control" value="cylinder" id="cylinder"
+                                    name="vessel_type" required checked>
+                            </div>
+                            <div class="col-6 form-group">
+                                <label for="sphere">sphere</label>
+                                <input type="radio" class="form-control" value="sphere" id="sphere" name="vessel_type" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="Material">
+                                    <h3>Material Using : </h3>
+                                </label>
+                                <select class="form-control" name="material" id="Material">
+                                    <option value="Carbon steel">Carbon steel</option>
+                                    <option value="Carbon-manganese steel">Carbon-manganese steel</option>
+                                    <option value="Carbon-molybdenum">Carbon-molybdenum</option>
+                                    <option value="Low alloy steel">Low alloy steel</option>
+                                    <option value="Stainless steel">Stainless steel (304)</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Temp">
+                                    <h3>Operating Temp (°C) : </h3>
+                                </label>
+                                <input type="number" class="form-control" id="Temp" name="temp"
+                                    placeholder="Temp in °C" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="Pres">
+                                    <h3>Operating Pressure : </h3>
+                                </label>
+                                <input type="number" class="form-control" id="Pres" name="pres"
+                                    placeholder="Pressure in kPa">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Dia">
+                                    <h3>Diameter (m) : </h3>
+                                </label>
+                                <input type="number" class="form-control" id="Dia" name="dia"
+                                    placeholder="Diameter in meters" step=".01" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="dtype">
+                                    <h4>Mentioned diameter is ? : </h4>
+                                </label>
+                                <select class="form-control" name="dtype" id="dtype">
+                                    <option value="internal">Internal</option>
+                                    <option value="external">External</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="corrosion">Corrosion allowance</label>
+                                <input type="checkbox" class="from-control " id="corrosion" name="corrosion" checked>
+                            </div>
+                        </div>
+                        <div class="form-row justify-content-center align-items-center mb-1">
+                            <div class="form-group col-md-9">
+                                <label for="j">
+                                    <h3>Welded joint efficiency</h3>
+                                </label>
+                                <input class="custom-range" type="range" min="0" max="100" name="j" id="j">
+                            </div>
+                            <div class="btn-primary btn-sm col-md-1 col-2" id="jDisplay">0.50</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Run Anaylsis <i class="fas fa-forward"></i></button>
+
+                    </form>
+                </div>
+                <div class="col-8 btn btn-lg m-2 sel withoutT" id="results">
+                    <div id="status">
+                        <b>Status : </b> <span>Input Pending <i style="color:orange" class="fas fa-exclamation-triangle"></i></span>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-12 text-center" id="error">
+                            <b>Error</b> : <span id="errorNote">No error as of now !</span>
+                        </div>
+                        <hr class="col-10" style="background-color: #14213d;">
+                        <div class="col-12 row text-center justify-content-center" id="tDisplay">
+                            
+                        </div>
+                        <div class="col-12 row text-center justify-content-center" id="rDisplay">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="col-md-7 info container">
+                    <h3>Project Guide:</h3>
+                    <h4><i class="fas fa-user-tie"></i> Dr KS RAJMOHAN</h4>
+                    <hr>
+                    <h3>Developers</h3>
+                    <h4><i class="fas fa-user-graduate"></i> VAIBHAV GOYAL</h4>
+                    <h4><i class="fas fa-user-graduate"></i> ADITI JAIN</h4>
+                    <h4><i class="fas fa-user-graduate"></i> PRIYADARSHINI BISWAL</h4>
+                </div>
+                <div class="col-md-4 info container">
+                    <h3>About Project:</h3>
+                    <hr>
+                    <p>This is a final year project of <strong>NIT Warangal</strong> and used to compute various
+                        parameters which are needed to design equipments useful in chemical plants </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="app_pvtnew.js"></script>
+</body>
+
+</html>
