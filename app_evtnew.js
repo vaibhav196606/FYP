@@ -3,6 +3,7 @@ var form = document.querySelector('#designNew');
 var sD = document.querySelector('#status');
 var iD = document.querySelector('#tDisplay');
 var rD = document.querySelector('#rDisplay');
+var cD = document.querySelector('#cDisplay');
 var rdown = document.querySelector('#report');
 var v = document.querySelector('#wT');
 var w = document.querySelector('#wP');
@@ -11,6 +12,16 @@ function topFunction() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
+var curday = function(sp){
+    today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //As January is 0.
+    var yyyy = today.getFullYear();
+    
+    if(dd<10) dd='0'+dd;
+    if(mm<10) mm='0'+mm;
+    return (dd+sp+mm+sp+yyyy);
+    };
 v.addEventListener('click',()=>{
        topFunction();
        a.classList.remove('help');
@@ -142,7 +153,7 @@ form.addEventListener('submit', (e)=>{
     //DOM
     sD.innerHTML = `<b>Status : </b> <span>Success! <i style="color:green" class="fas fa-check-circle"></i></span>`;
 
-    rD.innerHTML = `<div class="col-12">Input Table</div>
+    rD.innerHTML = `<div class="col-12"><h2>Input Table</h2></div>
     <div class="col-12 row justify-content-center align-items-center">
         <table class="p-4 col-md-7" border="1px" style="background-color: white;">
             <tr class="bg-primary" style="color: white;">
@@ -236,7 +247,7 @@ form.addEventListener('submit', (e)=>{
     el *=10;
     el = Math.ceil(el);
     el /=10;
-    iD.innerHTML = `<div class="col-12">Results:</div>
+    iD.innerHTML = `<div class="col-12"><h2>Results</h2></div>
     <div class="col-12 row justify-content-center">
         <table class="p-4" border="1px" style="background-color: white;">
             <tr class="bg-primary" style="color: white;">
@@ -288,6 +299,111 @@ form.addEventListener('submit', (e)=>{
                 </td>
             </tr>
         </table>
+    </div>`;
+    var svol =(area+(3.14*dc*el)+2*atotal)*(dout-di);
+    var at = (area+(3.14*dc*el)+2*atotal);
+    at *=100;
+    at  = Math.round(at);
+    at /=100;
+    var fcost = 1200;
+    var sden = 8000;
+    var skg = Math.round(svol*sden);
+    var sprice = 50;
+    var en = Math.round(q*6);
+    var enp = Math.round(5.5*en/3600);
+    cD.innerHTML = `<div class="col-12"><h2>Cost Analysis</h2>(As on ${curday('/')})</div>
+    <div class="col-12 row justify-content-center">
+        <h4>Fixed Capital</h4>
+    </div>    
+    <div class="col-12 row justify-content-center">
+        <table class="p-4" border="1px" style="background-color: white;">
+            <tr class="bg-primary" style="color: white;">
+                <td>
+                    Material
+                </td>
+                <td>
+                   Required Quantity
+                </td>
+                <td>
+                   Price (₹)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  Stainless Steel
+                </td>
+                <td>
+                    ${skg} Kg
+                </td>
+                <td>
+                    ${skg*sprice} ₹
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Fabrication
+                </td>
+                <td>
+                    ${at} m2
+                </td>
+                <td>
+                    ${at*fcost} ₹
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <div class="col-12 row justify-content-center">
+        <h4 style="color: rgb(191, 13, 96);">Total : ${skg*sprice + at*fcost} ₹</h4>
+    </div>
+    <br>
+    <div class="col-12 row justify-content-center">
+        <h4>Working Capital (Per Day)</h4>
+    </div>    
+    <div class="col-12 row justify-content-center">
+        <table class="p-4" border="1px" style="background-color: white;">
+            <tr class="bg-primary" style="color: white;">
+                <td>
+                    Material
+                </td>
+                <td>
+                   Required Quantity
+                </td>
+                <td>
+                   Price (₹)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                  Energy
+                </td>
+                <td>
+                    ${en} KJoules/Day
+                </td>
+                <td>
+                    ${enp} ₹/Day
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Workers
+                </td>
+                <td>
+                    8
+                </td>
+                <td>
+                    ${8*1200} ₹/Day
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <div class="col-12 row justify-content-center">
+        <h4 style="color: rgb(191, 13, 96);">Total : ${enp+ 8*1200} ₹/Day</h4>
+    </div>
+    <div class="col-12 row justify-content-center">
+        <a class="col-md-3 mr-1 btn btn-primary" href="https://www.ofbusiness.com/">BUY STEEL</a>
+        <a class="col-md-2 mr-1 btn btn-warning" href="http://www.linkzila.com/showcase">STAFF</a>
+        <a class="col-md-3 mr-1 btn btn-primary" href="https://novatechprojects.com/steel-structural-fabricators/">FABRICATOR</a>
+        <a class="col-md-2 mr-1 btn btn-warning" href="https://www.bajajfinserv.in/small-scale-industries-loan">LOAN</a>
     </div>`;
     rdown.innerHTML = `<button class='col-10 col-md-6 btn btn-primary' onclick="saveDiv('tDisplay','Title')">Save Report</button>`;
 
